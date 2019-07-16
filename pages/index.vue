@@ -17,7 +17,13 @@
     <div class="search">
       <div class="trapezoidal">
         <el-row type="flex">
-          <div v-for="(item,index) in tabs" :key="index" class="tabdiv" @click="handleClick(index)" :class="{ active: currentTab === index }">
+          <div
+            v-for="(item,index) in tabs"
+            :key="index"
+            class="tabdiv"
+            @click="handleClick(index)"
+            :class="{ active: currentTab === index }"
+          >
             <span>{{ item.name }}</span>
           </div>
         </el-row>
@@ -35,7 +41,7 @@
   </div>
 </template>
 
-<script>
+<script> 
 export default {
   data() {
     return {
@@ -59,17 +65,17 @@ export default {
     });
   },
   methods: {
-    handleClick(index){
-      console.log(index)
+    handleClick(index) {
+      // console.log(index);
       this.currentTab = index;
-      if(this.currentTab === 2){
-        this.$router.push('/air')
+      if (this.currentTab === 2) {
+        this.$router.push("/air");
       }
-      console.log(this.currentTab)
+      // console.log(this.currentTab);
     },
-    Search(){}
+    Search() {}
   }
-}
+};
 </script>
 
 <style scoped lang="less">
@@ -81,7 +87,6 @@ export default {
   /deep/ .el-carousel__container {
     height: 700px;
   }
-
   .banner-image {
     width: 100%;
     height: 100%;
@@ -145,5 +150,9 @@ export default {
       background: #409eff;
     }
   }
+}
+.active {
+  border-bottom: 30px solid #409eff !important;
+  border-right: 15px solid transparent !important;
 }
 </style>
