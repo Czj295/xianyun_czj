@@ -100,14 +100,14 @@ export default {
           name: value
         }
       }).then(res => {
-        console.log(res);
+        // console.log(res);
         const { data } = res.data;
         // 给数组中的对象添加value
         const arr = data.map(v => {
           v.value = v.name.replace("市", "");
           return v;
         });
-        console.log(arr);
+        // console.log(arr);
         // 默认选中第一个
         // this.form.departCity = arr[0].value;
         // this.form.departCode = arr[0].sort;
@@ -131,14 +131,14 @@ export default {
           name: value
         }
       }).then(res => {
-        console.log(res);
-        const { data } = res.data;
+        // console.log(res);
+        console.log(data)
         // 给数组中的对象添加value
         const arr = data.map(v => {
           v.value = v.name.replace("市", "");
           return v;
         });
-        console.log(arr);
+        // console.log(arr);
         // 默认选中第一个
         // this.form.destCity = arr[0].value;
         // this.form.destCode = arr[0].sort;
@@ -174,7 +174,7 @@ export default {
 
     // 提交表单是触发
     handleSubmit() {
-      console.log(this.form);
+      // console.log(this.form);
       const rules = {
         departCity: {
           value: this.form.departCity,
@@ -212,6 +212,12 @@ export default {
           query: this.form
         });
       }
+      const airs = JSON.parse( localStorage.getItem('airs') ) || []
+      airs.unshift(this.form)
+      if(airs.length > 5){
+        airs.length = 5
+      }
+      localStorage.setItem('airs',JSON.stringify(airs))
     }
   },
   mounted() {}

@@ -1,5 +1,5 @@
 <template>
-  <div class="flight-item" @click='isShow = !isShow'>
+  <div class="flight-item" @click="isShow = !isShow">
     <div>
       <!-- 显示的机票信息 -->
       <el-row type="flex" align="middle" class="flight-info">
@@ -28,7 +28,7 @@
         </el-col>
       </el-row>
     </div>
-    <div class="flight-recommend" v-show='isShow'>
+    <div class="flight-recommend" v-show="isShow">
       <!-- 隐藏的座位信息列表 -->
       <el-row type="flex" justify="space-between" align="middle">
         <el-col :span="4">低价推荐</el-col>
@@ -47,7 +47,7 @@
             </el-col>
             <el-col :span="5" class="price">￥{{ item.org_settle_price }}</el-col>
             <el-col :span="3" class="choose-button">
-              <el-button type="warning" size="mini">选定</el-button>
+              <el-button type="warning" size="mini" @click="handleChoose(data.id, item.seat_xid)">选定</el-button>
               <p>剩余：{{ item.discount }}</p>
             </el-col>
           </el-row>
@@ -67,10 +67,10 @@ export default {
   //     default: {}
   //   }
   // }
-  data(){
+  data() {
     return {
       isShow: false
-    }
+    };
   },
   props: {
     data: {
@@ -85,11 +85,22 @@ export default {
       const depMin = dep[0] * 60 + +dep[1];
       const arrMin = arr[0] * 60 + +arr[1];
       if (arr < dep) {
-        arr[0] += 24
+        arr[0] += 24;
       }
       let distime = arrMin - depMin;
 
       return `${Math.floor(distime / 60)}时${distime % 60}分`;
+    }
+  },
+  methods: {
+    handleChoose(id, seatId) {
+      this.$router.push({
+        path: "/air/order",
+        query: {
+          id,
+          seat_xid: seatId
+        }
+      });
     }
   }
 };
